@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.lainiao.myqq.dao.AccountMapper" >
+  <resultMap id="BaseResultMap" type="net.lainiao.myqq.entity.Account" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="userpass" property="userpass" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="conste" property="conste" jdbcType="VARCHAR" />
+    <result column="blood" property="blood" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="faceimg" property="faceimg" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username, age, gender, userpass, nickname, conste, blood, createtime, state, 
+    faceimg
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from account
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.lainiao.myqq.entity.Account" >
+    insert into account (id, username, age, 
+      gender, userpass, nickname, 
+      conste, blood, createtime, 
+      state, faceimg)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{gender,jdbcType=VARCHAR}, #{userpass,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{conste,jdbcType=VARCHAR}, #{blood,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=INTEGER}, #{faceimg,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="net.lainiao.myqq.entity.Account" >
+    insert into account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="userpass != null" >
+        userpass,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="conste != null" >
+        conste,
+      </if>
+      <if test="blood != null" >
+        blood,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="faceimg != null" >
+        faceimg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="userpass != null" >
+        #{userpass,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="conste != null" >
+        #{conste,jdbcType=VARCHAR},
+      </if>
+      <if test="blood != null" >
+        #{blood,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="faceimg != null" >
+        #{faceimg,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.lainiao.myqq.entity.Account" >
+    update account
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="userpass != null" >
+        userpass = #{userpass,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="conste != null" >
+        conste = #{conste,jdbcType=VARCHAR},
+      </if>
+      <if test="blood != null" >
+        blood = #{blood,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="faceimg != null" >
+        faceimg = #{faceimg,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.lainiao.myqq.entity.Account" >
+    update account
+    set username = #{username,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      gender = #{gender,jdbcType=VARCHAR},
+      userpass = #{userpass,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      conste = #{conste,jdbcType=VARCHAR},
+      blood = #{blood,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER},
+      faceimg = #{faceimg,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

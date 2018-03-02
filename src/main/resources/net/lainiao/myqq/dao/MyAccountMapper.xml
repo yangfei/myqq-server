@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.lainiao.myqq.dao.AccountMapper">
+    <select id="login" resultMap="BaseResultMap" parameterType="net.lainiao.myqq.entity.Account">
+        select * from account where username=#{username} and userpass=#{userpass} and state=1
+         limit 0,1
+  </select>
+
+    <select id="searchFriend" resultMap="BaseResultMap" parameterType="String">
+    select * from account where username like "%"#{keyword}"%" OR  nickname like "%"#{keyword}"%"
+</select>
+    <select id="getFriends" resultMap="BaseResultMap" parameterType="int">
+         SELECT id,nickname,faceimg FROM account WHERE id IN (
+	SELECT friendid FROM friend WHERE accountid=#{accountid}
+ )
+    </select>
+    <select id="getNickName" resultType="String" parameterType="int">
+        select nickName from account where id=#{id}
+    </select>
+
+    <select id="getCountByUserName" resultType="int" parameterType="String">
+        select count(1) from account where username=#{username}
+    </select>
+</mapper>

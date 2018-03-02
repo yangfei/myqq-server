@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.lainiao.myqq.dao.SysMessMapper" >
+  <resultMap id="BaseResultMap" type="net.lainiao.myqq.entity.SysMess" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="messtype" property="messtype" jdbcType="INTEGER" />
+    <result column="fromid" property="fromid" jdbcType="INTEGER" />
+    <result column="targetid" property="targetid" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, messtype, fromid, targetid, content, createtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sysmess
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sysmess
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.lainiao.myqq.entity.SysMess" >
+    insert into sysmess (id, messtype, fromid, 
+      targetid, content, createtime
+      )
+    values (#{id,jdbcType=INTEGER}, #{messtype,jdbcType=INTEGER}, #{fromid,jdbcType=INTEGER}, 
+      #{targetid,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.lainiao.myqq.entity.SysMess" >
+    insert into sysmess
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="messtype != null" >
+        messtype,
+      </if>
+      <if test="fromid != null" >
+        fromid,
+      </if>
+      <if test="targetid != null" >
+        targetid,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="messtype != null" >
+        #{messtype,jdbcType=INTEGER},
+      </if>
+      <if test="fromid != null" >
+        #{fromid,jdbcType=INTEGER},
+      </if>
+      <if test="targetid != null" >
+        #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.lainiao.myqq.entity.SysMess" >
+    update sysmess
+    <set >
+      <if test="messtype != null" >
+        messtype = #{messtype,jdbcType=INTEGER},
+      </if>
+      <if test="fromid != null" >
+        fromid = #{fromid,jdbcType=INTEGER},
+      </if>
+      <if test="targetid != null" >
+        targetid = #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.lainiao.myqq.entity.SysMess" >
+    update sysmess
+    set messtype = #{messtype,jdbcType=INTEGER},
+      fromid = #{fromid,jdbcType=INTEGER},
+      targetid = #{targetid,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

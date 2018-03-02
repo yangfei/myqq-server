@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.lainiao.myqq.dao.ChatMessMapper" >
+  <resultMap id="BaseResultMap" type="net.lainiao.myqq.entity.ChatMess" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="fromid" property="fromid" jdbcType="INTEGER" />
+    <result column="targetid" property="targetid" jdbcType="INTEGER" />
+    <result column="targettype" property="targettype" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="net.lainiao.myqq.entity.ChatMess" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fromid, targetid, targettype, createtime
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from chatmess
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from chatmess
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.lainiao.myqq.entity.ChatMess" >
+    insert into chatmess (id, fromid, targetid, 
+      targettype, createtime, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{fromid,jdbcType=INTEGER}, #{targetid,jdbcType=INTEGER}, 
+      #{targettype,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.lainiao.myqq.entity.ChatMess" >
+    insert into chatmess
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fromid != null" >
+        fromid,
+      </if>
+      <if test="targetid != null" >
+        targetid,
+      </if>
+      <if test="targettype != null" >
+        targettype,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fromid != null" >
+        #{fromid,jdbcType=INTEGER},
+      </if>
+      <if test="targetid != null" >
+        #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="targettype != null" >
+        #{targettype,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.lainiao.myqq.entity.ChatMess" >
+    update chatmess
+    <set >
+      <if test="fromid != null" >
+        fromid = #{fromid,jdbcType=INTEGER},
+      </if>
+      <if test="targetid != null" >
+        targetid = #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="targettype != null" >
+        targettype = #{targettype,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.lainiao.myqq.entity.ChatMess" >
+    update chatmess
+    set fromid = #{fromid,jdbcType=INTEGER},
+      targetid = #{targetid,jdbcType=INTEGER},
+      targettype = #{targettype,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.lainiao.myqq.entity.ChatMess" >
+    update chatmess
+    set fromid = #{fromid,jdbcType=INTEGER},
+      targetid = #{targetid,jdbcType=INTEGER},
+      targettype = #{targettype,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
